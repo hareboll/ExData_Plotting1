@@ -1,0 +1,8 @@
+setwd("~/Coursera/ExploratoryAssignment1")
+Table <- read.table(pipe('grep "^[1-2]/2/2007" "household_power_consumption.txt"'),header=F, sep=';')
+colnames(Table) <-names(read.table('household_power_consumption.txt', header=TRUE,sep=";",nrows=1))
+Table$Date<- as.Date(Table$Date, format="%d/%m/%Y" )
+dateTime <- strptime( paste(Table$Date,Table$Time), format="%Y-%m-%d %H:%M:%S")
+png("Plot2.png")
+plot(dateTime,Table$Global_active_power, ylab="Global Active Power(kilowatts)", type="l")
+dev.off()

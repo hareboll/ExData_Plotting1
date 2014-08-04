@@ -1,0 +1,6 @@
+Table <- read.table(pipe('grep "^[1-2]/2/2007" "household_power_consumption.txt"'),header=F, sep=';')
+colnames(Table) <-names(read.table('household_power_consumption.txt', header=TRUE,sep=";",nrows=1))
+Table$Date<- as.Date(Table$Date, format="%m/%d/%Y" )
+png("Plot1.png")
+hist(Table$Global_active_power, col="red", main="Global Active Power", xlab="Global Active Power (Kilowatts)")
+dev.off()
